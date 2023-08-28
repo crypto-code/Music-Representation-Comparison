@@ -25,7 +25,7 @@ print(f"Train Size: {len(train_data)}")
 print(f"Loading Validation Data...")
 valid_data = MTTDataset(split="valid")
 valid_dataloader = DataLoader(valid_data, batch_size=4, shuffle=True, num_workers=5, drop_last=True)
-print(f"Training Size: {len(train_data)}")
+print(f"Validation Size: {len(valid_data)}")
 
 print(f"Loading Test Data...")
 test_data = MTTDataset(split="test")
