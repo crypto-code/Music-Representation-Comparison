@@ -1,3 +1,5 @@
+import os
+
 from transformers import Wav2Vec2FeatureExtractor
 from transformers import AutoModel
 from mlp import MERT_MLP
@@ -15,6 +17,8 @@ processor = Wav2Vec2FeatureExtractor.from_pretrained("/hpctmp/e0589920/MERT-v1-3
 
 # Downstream Tagging Model
 model = MERT_MLP(1024, [], 50)
+if os.path.exists("./models/mert.pth"):
+    model.load_state_dict(torch.load("mert.pth", map_location='cpu'))
 model.to(device)
 
 print(f"Loading Train Data...")
@@ -51,6 +55,9 @@ def train_epoch():
         loss.backward()
         optimizer.step()
 
+
+if not os.path.exists("./models"):
+    os.makedirs("./models")
 
 def eval(split="valid"):
     model.eval()
@@ -90,10 +97,9 @@ for epoch in range(5):
     print(f"AUC: {auc}, AP: {ap}\n")
     if auc > best_auc:
         best_auc = auc
-        torch.save(model.state_dict(), "mert.pth")
-
+        torch.save(model.state_dict(), "./models/mert.pth")
 
 print("Evaluating...")
-model.load_state_dict(torch.load("mert.pth"))
+model.load_state_dict(torch.load("./models/mert.pth"))
 auc, ap = eval(split="test")
 print(f"AUC: {auc}, AP: {ap}\n")
