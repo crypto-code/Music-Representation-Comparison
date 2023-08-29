@@ -104,7 +104,7 @@ while True:
     else:
         miss_count += 1
     epoch += 1
-    if miss_count > 2:
+    if miss_count >= 5:
         break
 
 print("Evaluating...")
