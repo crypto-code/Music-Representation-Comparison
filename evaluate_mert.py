@@ -12,13 +12,13 @@ from sklearn.metrics import average_precision_score, r2_score, roc_auc_score
 
 # Music Representation Model
 device = "cuda"
-mert_model = AutoModel.from_pretrained("/hpctmp/e0589920/MERT-v1-330M", trust_remote_code=True).to(device)
-processor = Wav2Vec2FeatureExtractor.from_pretrained("/hpctmp/e0589920/MERT-v1-330M", trust_remote_code=True)
+mert_model = AutoModel.from_pretrained("m-a-p/MERT-v1-330M", trust_remote_code=True).to(device)
+processor = Wav2Vec2FeatureExtractor.from_pretrained("m-a-p/MERT-v1-330M", trust_remote_code=True)
 
 # Downstream Tagging Model
 model = MERT_MLP(1024, [], 50)
 if os.path.exists("./models/mert.pth"):
-    model.load_state_dict(torch.load("mert.pth", map_location='cpu'))
+    model.load_state_dict(torch.load("./models/mert.pth", map_location='cpu'))
 model.to(device)
 
 print(f"Loading Train Data...")
@@ -58,6 +58,7 @@ def train_epoch():
 
 if not os.path.exists("./models"):
     os.makedirs("./models")
+
 
 def eval(split="valid"):
     model.eval()
