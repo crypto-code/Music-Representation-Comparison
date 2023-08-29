@@ -90,14 +90,22 @@ def eval(split="valid"):
 
 print("Training...")
 best_auc = 0
-for epoch in range(5):
+miss_count = 0
+epoch = 0
+while True:
     print(f"Epoch {epoch + 1}")
     train_epoch()
     auc, ap = eval()
     print(f"AUC: {auc}, AP: {ap}\n")
     if auc > best_auc:
         best_auc = auc
+        miss_count = 0
         torch.save(model.state_dict(), "./models/mert.pth")
+    else:
+        miss_count += 1
+    epoch += 1
+    if miss_count > 2:
+        break
 
 print("Evaluating...")
 model.load_state_dict(torch.load("./models/mert.pth"))
