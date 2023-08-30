@@ -23,10 +23,10 @@ label_to_idx = {l: i for i, l in enumerate(labels)}
 
 
 class MTTDataset(Dataset):
-    def __init__(self, split="train"):
+    def __init__(self, split="train", sr=24000):
         self.X, self.Y = [], []
         for idx, row in tqdm(splits[split].items(), total=len(splits[split])):
-            audio = librosa.load(f"./MTT/audios/{row['extra']['mp3_path']}", sr=24000)[0]
+            audio = librosa.load(f"./MTT/audios/{row['extra']['mp3_path']}", sr=sr)[0]
             if len(audio.shape) == 2:
                 audio = audio.mean(1)
             self.X.append(audio)
