@@ -27,10 +27,10 @@ We use the same split as [Jukebox](https://github.com/p-lambda/jukemir).
 ### Model Evaluation
 
 We evaluate the following music representation models in this paper:
-- [MERT](evaluate_mert.py) [https://arxiv.org/abs/2306.00107](https://arxiv.org/abs/2306.00107)
-- [CLAP](evaluate_clap.py) [https://arxiv.org/abs/2211.06687](https://arxiv.org/abs/2211.06687)
-- [Imagebind](evaluate_imagebind.py) [https://arxiv.org/abs/2305.05665](https://arxiv.org/abs/2305.05665)
-- [Wav2CLIP](evaluate_wav2clip.py) [https://arxiv.org/abs/2110.11499](https://arxiv.org/abs/2110.11499)
+- [MERT](evaluate_mert.py) ([https://arxiv.org/abs/2306.00107](https://arxiv.org/abs/2306.00107))
+- [CLAP](evaluate_clap.py) ([https://arxiv.org/abs/2211.06687](https://arxiv.org/abs/2211.06687))
+- [Imagebind](evaluate_imagebind.py) ([https://arxiv.org/abs/2305.05665](https://arxiv.org/abs/2305.05665))
+- [Wav2CLIP](evaluate_wav2clip.py) ([https://arxiv.org/abs/2110.11499](https://arxiv.org/abs/2110.11499))
 
 ### Model Performance
 
